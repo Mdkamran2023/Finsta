@@ -1,0 +1,1 @@
+Route:entry point for all the requests from browser.get to know action should be called.
