@@ -21,3 +21,15 @@ module.exports.signIn=function(req,res)
         title:"Finsta|Sign In"
     });
 }
+
+// get the Sign Up data
+module.exports.create=function(req,res)
+{
+// TODO  LATER
+}
+
+// sign in and create a session for the user
+module.exports.createSession=function(req,res)
+{
+//   TODO LATER  
+}
