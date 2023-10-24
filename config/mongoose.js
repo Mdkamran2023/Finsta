@@ -31,12 +31,52 @@
 // module.exports = db;
 
 
+// const mongoose = require('mongoose');
+
+// main().catch(err => console.log(err));
+
+// async function main() {
+//   await mongoose.connect('mongodb://127.0.0.1:27017/Finsta_development');
+
+//   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+// }
+
+// const mongoose = require('mongoose');
+
+// main()
+//   .then(() => console.log('Connected to the database'))
+//   .catch(err => console.error('Error connecting to the database', err));
+
+// function main() {
+//   return new Promise((resolve, reject) => {
+//     mongoose.connect('mongodb://127.0.0.1:27017/Finsta_development', { useNewUrlParser: true, useUnifiedTopology: true });
+
+//     mongoose.connection.once('open', () => {
+//       resolve();
+//     });
+
+//     mongoose.connection.on('error', (err) => {
+//       reject(err);
+//     });
+//   });
+// }
+
+
 const mongoose = require('mongoose');
 
-main().catch(err => console.log(err));
+// Define the connection URL
+const dbURL = 'mongodb://127.0.0.1:27017/Finsta_development';
 
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Finsta_development');
+// Create a Mongoose connection
+mongoose
+  .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database', err);
+  });
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
+  const db=mongoose.connection;
+// Export the Mongoose connection (optional)
+module.exports = db;

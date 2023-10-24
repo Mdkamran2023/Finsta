@@ -7,8 +7,8 @@
 module.exports.home=function(req,res){
     // return res.end('<h1>Express is up for Finsta </h1>')
 
-    console.log(req.cookies);
-    // taking res as value of 25 (check application in developers tool)
+    // console.log(req.cookies);
+    // // taking res as value of 25 (check application in developers tool)
     res.cookie('user_id',25);
     // rendering home.ejs
     return res.render('home',{

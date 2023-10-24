@@ -1,3 +1,7 @@
 Route:entry point for all the requests from browser.get to know action should be called.
 
 Passport.js is a middleware which authenticates user requests. When authentication succeeds a session for the signed-in user is established, and the next function in the stack is called. This next function is typically application-specific logic which will process the request.
+
+express-session :automatically stored the encrypted user in cookies
+To create a session cookie
+To store the logged in user’s information in an encrypted format in the cookie
