@@ -64,3 +64,20 @@ module.exports.create = (req, res) => {
 module.exports.createSession = function (req, res) {
   return res.redirect('/');
 };
+
+// 
+// module.exports.destroySession=function(req,res)
+// {
+//   req.logout(); // function comes from passport .js 
+//   return res.redirect('/');
+// }
+
+module.exports.destroySession = function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      console.log("Error during logout:", err);
+      return;
+    }
+    return res.redirect('/');
+  });
+};

@@ -63,6 +63,7 @@
 
 
 const mongoose = require('mongoose');
+const db=mongoose.connection;
 
 // Define the connection URL
 const dbURL = 'mongodb://127.0.0.1:27017/Finsta_development';
@@ -77,6 +78,5 @@ mongoose
     console.error('Error connecting to the database', err);
   });
 
-  const db=mongoose.connection;
 // Export the Mongoose connection (optional)
 module.exports = db;

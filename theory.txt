@@ -5,3 +5,11 @@ Passport.js is a middleware which authenticates user requests. When authenticati
 express-session :automatically stored the encrypted user in cookies
 To create a session cookie
 To store the logged in user’s information in an encrypted format in the cookie
+
+
+/without Mongo store:user was logged out after every server restart...
+//require session information to store on mongo database..
+
+
+//sign out:
+Removing the user’s session cookie to remove the identity
