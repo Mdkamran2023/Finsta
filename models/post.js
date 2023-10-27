@@ -1,0 +1,21 @@
+const mongoose=require('mongoose');
+
+const postSchema=new mongoose.schema(
+    {
+    content:{
+        type:String,
+        required:true //for saving the data
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId, //accessing objecId of User
+        ref:'User' //refering to User
+    }
+
+},
+{
+    timestamp:true
+}
+);
+
+const Post=mongoose.model('Post',postSchema);
+module.exports=Post;
