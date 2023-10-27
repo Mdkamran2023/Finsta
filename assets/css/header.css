@@ -1,0 +1,16 @@
+#header-ele {
+  display: flex;
+  flex-direction: row;
+  background-image: linear-gradient(#f0ebeb, #cbcbcb);
+  color: #6e3e04;
+  justify-content: space-between; }
+  #header-ele .elements {
+    display: flex; }
+    #header-ele .elements li {
+      justify-content: space-between;
+      list-style: none;
+      margin-top: 1rem; }
+      #header-ele .elements li a {
+        text-decoration: none;
+        padding: 10px;
+        color: #183c3d; }

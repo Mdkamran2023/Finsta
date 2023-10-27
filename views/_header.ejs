@@ -1,6 +1,8 @@
-<header>
-    Page Header
-    <ul>
+<link rel="stylesheet" href="/css/header.css">
+<header id="header-ele">
+    <!-- Page Header -->
+    <h1>Finsta</h1>
+    <ul class="elements">
         <% if (locals.user)
         {%>
           <li>
@@ -17,7 +19,7 @@
         <a href="/users/sign-in">Sign In</a>
        </li>
        <li>
-        <a href="/users/sign-up"> SIgn Up</a>
+        <a href="/users/sign-up"> Sign Up</a>
        </li>
 
         <%} %>

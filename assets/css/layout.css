@@ -1,5 +1,7 @@
-body{
-    margin: 0;
-    padding: 0;
-    /* text-align:center; */
-}
+body {
+  margin: 0;
+  padding: 0;
+  /* text-align:center; */ }
+  body #layout-main {
+    height: 90%;
+    background-image: linear-gradient(#aaedf0, #f5f0f0); }

@@ -13,3 +13,21 @@ To store the logged in user’s information in an encrypted format in the cookie
 
 //sign out:
 Removing the user’s session cookie to remove the identity
+
+
+//Sass--indented styling (syntatically Awesome stylesheet)
+div
+   p
+    a
+
+sass is scss+indented;
+
+//SCSS(browsers stands  only css )
+div{
+    p{
+        a{
+
+        }
+    }
+}
+//writing of code scss and our middleware will convert it into css
