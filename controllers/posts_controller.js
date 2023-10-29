@@ -4,6 +4,7 @@ module.exports.create = function(req, res) {
     Post.create({
         content: req.body.content,
         user: req.user._id
+        // to get the data from browser
     })
     .then(post => {
         // If post creation is successful, redirect back

@@ -1,4 +1,4 @@
-<h1>Finsta/<%=title%></h1>
+<h1><%=title%></h1>
 
 <!-- for adding post -->
 <section id="feed-posts">
@@ -7,4 +7,21 @@
     <textarea name="content" id="new-post-content"cols="30" rows="3"placeholder="Type Here..."></textarea>
     <input type="submit" value="Post" />
   </form>
+
+  <div id="posts-list-container">
+    <ul>
+      <% for(post of posts){%>
+        
+        <li>
+          <p>
+          <%= post.content%>
+          <br>
+          <small>
+            <%= post.user.name%>
+          </small>
+        </p>
+        </li>
+     <% } %>
+    </ul>
+  </div>
 </section>
