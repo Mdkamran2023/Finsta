@@ -11,7 +11,8 @@ module.exports.home=function(req,res){
 
     // populate the user of each posts...
         Post.find({})
-        .populate('user')
+        // .populate('user','user-_id')//Exclude _id, include name
+        .populate('user','name -_id') //include name but excludes id
         .populate({
            path :'comments',
            populate:{
