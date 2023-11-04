@@ -8,20 +8,17 @@ const Post =require('../models/post');
 
 module.exports.home=function(req,res){
 
-    // Post.find({})
-    //     .then(posts => {
-    //         return res.render('home', {
-    //             title: "Finsta | Home",
-    //             posts: posts
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.error('Error in finding posts:', err);
-    //         return res.status(500).send('Error finding posts');
-    //     });
 
     // populate the user of each posts...
-        Post.find({}).populate('user').exec()
+        Post.find({})
+        .populate('user')
+        .populate({
+           path :'comments',
+           populate:{
+            path:'user'
+           }
+        })
+        .exec()
         .then(posts => {
             return res.render('home', {
                 title: "Finsta | Home",

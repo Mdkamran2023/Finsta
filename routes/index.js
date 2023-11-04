@@ -12,6 +12,7 @@ router.get('/',homeController.home);
 // this route will control all other routes and it is controlled by Finsta/index
 router.use('/users',require('./users'));
 router.use('/posts',require('./posts'));
+router.use('/comments',require('./comments'));
 
 // for any further routes,access from here
 // router.use('/routername',require(./routerfile')); 
