@@ -35,26 +35,56 @@ module.exports.create = function (req, res) {
 //   });
 // };
 
-module.exports.destroy=function(req,res){
+// module.exports.destroy=function(req,res){
+//   Post.findById(req.params.id)
+//   //.id means converting the object id into string
+//   .then((post)=>{
+// if(post.user == req.user.id){
+//   return post.remove()
+//   .then(()=>Comment.deleteMany({post:req.params.id}))
+//   .then(()=>res.redirect("back"))
+//   .catch((err)=>{
+//     console.log("Error deleting comments:",err);
+//     res.redirect("back");
+//   });
+// }else{
+//   res.redirect("back");
+// }
+//   })
+//   .catch((err)=>{
+//     console.log("Error finding post:",err);
+//     res.redirect("back");
+//   });
+// };
+
+
+module.exports.destroy = function (req, res) {
   Post.findById(req.params.id)
-  //.id means converting the object id into string
-  .then((post)=>{
-if(post.user == req.user.id){
-  return post.remove()
-  .then(()=>Comment.deleteMany({post:req.params.id}))
-  .then(()=>res.redirect("back"))
-  .catch((err)=>{
-    console.log("Error deleting comments:",err);
-    res.redirect("back");
-  });
-}else{
-  res.redirect("back");
-}
-  })
-  .catch((err)=>{
-    console.log("Error finding post:",err);
-    res.redirect("back");
-  });
+    .then((post) => {
+      if (!post) {
+        return res.status(404).send("Post not found");
+      }
+
+      // Check if the current user is the owner of the post
+      if (post.user.toString() === req.user.id) {
+        // Remove the post and associated comments
+        return Promise.all([
+          Post.deleteOne({ _id: req.params.id }),
+          Comment.deleteMany({ post: req.params.id })
+        ])
+          .then(() => res.redirect("back"))
+          .catch((err) => {
+            console.error("Error deleting comments:", err);
+            res.redirect("back");
+          });
+      } else {
+        return res.status(403).send("Unauthorized");
+      }
+    })
+    .catch((err) => {
+      console.error("Error finding post:", err);
+      res.redirect("back");
+    });
 };
 
 

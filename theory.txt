@@ -31,3 +31,8 @@ div{
     }
 }
 //writing of code scss and our middleware will convert it into css
+
+
+
+
+user.id gets the string of user._id and  user._id is of type ObjectId

@@ -53,14 +53,25 @@ module.exports.create = function(req, res) {
 //     })
 // }
 
+
+
 module.exports.destroy = function (req, res) {
   Comment.findById(req.params.id)
     .then((comment) => {
-      if (comment.user == req.user.id) {
+      if (!comment) {
+        return res.status(404).send("Comment not found");
+      }
+
+      // Check if the current user is the owner of the comment
+      if (comment.user.toString() === req.user.id) {
         let postId = comment.post;
-        return comment.remove().then(() => {
-          return Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
-        });
+
+        // Remove the comment and update the post
+        return Promise.all([
+          // comment.remove(),
+          comment.deleteOne({ _id: req.params.id }),
+          Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } })
+        ]);
       } else {
         return Promise.reject("Unauthorized");
       }
@@ -70,9 +81,10 @@ module.exports.destroy = function (req, res) {
     })
     .catch((err) => {
       console.error("Error in deleting comment:", err);
-      return res.redirect("back");
+      return res.status(500).send("Internal Server Error");
     });
 };
+
 
 
 
