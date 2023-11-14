@@ -14,11 +14,12 @@ module.exports.home=function(req,res){
         // .populate('user','user-_id')//Exclude _id, include name
         .populate('user','name -_id') //include name but excludes id
         .populate({
-           path :'comments',
-           populate:{
-            path:'user'
-           }
-        })
+            path: 'comments',
+            populate: {
+              path: 'user'
+            }
+          })
+          
         .exec()
         .then(posts => {
             return res.render('home', {
