@@ -34,6 +34,46 @@ module.exports.create = function(req, res) {
         });
 };
 
+// module.exports.destroy=function(req,res)
+// {
+//     Comment.findById(req.params.id,function(err,comment){
+//         if(comment.user ==req.user.id){
+
+//             let postId=comment.post;
+//             comment.remove();
+
+//             Post.findByIdAndUpdate(postId,{$pull: {comments:req.params.id},function(err,post){
+//                 return res.redirect('back');
+//             }})
+//         }
+//         else{
+//             return res.redirect('back');
+//         }
+
+//     })
+// }
+
+module.exports.destroy = function (req, res) {
+  Comment.findById(req.params.id)
+    .then((comment) => {
+      if (comment.user == req.user.id) {
+        let postId = comment.post;
+        return comment.remove().then(() => {
+          return Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+        });
+      } else {
+        return Promise.reject("Unauthorized");
+      }
+    })
+    .then(() => {
+      return res.redirect("back");
+    })
+    .catch((err) => {
+      console.error("Error in deleting comment:", err);
+      return res.redirect("back");
+    });
+};
+
 
 
 
