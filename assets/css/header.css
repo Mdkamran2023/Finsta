@@ -1,16 +1,32 @@
 #header-ele {
   display: flex;
   flex-direction: row;
-  background-image: linear-gradient(#f0ebeb, #cbcbcb);
-  color: #6e3e04;
-  justify-content: space-between; }
+  background: linear-gradient(to right, #3498db, #2c3e50);
+  /* Update the background colors */
+  color: #fff;
+  /* Set text color to white */
+  padding: 1rem;
+  /* Add some padding for better spacing */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Add a subtle box shadow for depth */
+  align-items: center;
+  /* Align items vertically in the center */ }
   #header-ele .elements {
-    display: flex; }
+    display: flex;
+    margin-left: auto;
+    /* Push elements to the right */ }
     #header-ele .elements li {
-      justify-content: space-between;
       list-style: none;
-      margin-top: 1rem; }
+      margin-left: 1rem;
+      /* Add some spacing between list items */ }
       #header-ele .elements li a {
         text-decoration: none;
         padding: 10px;
-        color: #183c3d; }
+        color: #fff;
+        border-radius: 5px;
+        /* Add rounded corners */
+        transition: background 0.3s ease;
+        /* Smooth background transition */ }
+        #header-ele .elements li a:hover {
+          background: rgba(255, 255, 255, 0.2);
+          /* Add a subtle hover effect */ }

@@ -1,8 +1,32 @@
-#footer-main{
-    display:flex;
-    background-color: black;
-    color:antiquewhite;
+// #footer-main{
+//     display:flex;
+//     background-color: black;
+//     color:antiquewhite;
+//     justify-content: center;
+//     align-items: center;
+//     height:2rem;
+// }
+
+#footer-main {
+    display: flex;
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Text color */
     justify-content: center;
     align-items: center;
-    height:2rem;
-}
+    height: 4rem; /* Increased height for better visibility */
+  
+    /* Add some styling to the text */
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  
+    /* Add a subtle box shadow for depth */
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+  
+    /* Add a smooth transition for hover effect */
+    transition: background 0.3s ease;
+  
+    &:hover {
+      background-color: #555; /* Darker background on hover */
+    }
+  }
+  

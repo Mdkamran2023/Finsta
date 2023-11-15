@@ -1,0 +1,84 @@
+#home-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; }
+  #home-container #feed-posts, #home-container #user-friends {
+    width: 48%; }
+    #home-container #feed-posts h4, #home-container #user-friends h4 {
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+      margin-bottom: 10px; }
+    #home-container #feed-posts ul, #home-container #user-friends ul {
+      list-style: none;
+      padding: 0; }
+      #home-container #feed-posts ul li, #home-container #user-friends ul li {
+        margin-bottom: 15px;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards; }
+        #home-container #feed-posts ul li:nth-child(even), #home-container #user-friends ul li:nth-child(even) {
+          animation-delay: 0.2s; }
+        #home-container #feed-posts ul li:nth-child(odd), #home-container #user-friends ul li:nth-child(odd) {
+          animation-delay: 0.4s; }
+    #home-container #feed-posts #new-post-form, #home-container #user-friends #new-post-form {
+      margin-bottom: 15px;
+      animation: slideIn 0.5s forwards; }
+      #home-container #feed-posts #new-post-form textarea, #home-container #user-friends #new-post-form textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #2ecc71;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        resize: vertical; }
+      #home-container #feed-posts #new-post-form input[type="submit"], #home-container #user-friends #new-post-form input[type="submit"] {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer; }
+    #home-container #feed-posts #posts-list-container ul, #home-container #user-friends #posts-list-container ul {
+      padding: 0; }
+      #home-container #feed-posts #posts-list-container ul li, #home-container #user-friends #posts-list-container ul li {
+        background-color: #fff;
+        padding: 15px;
+        border: 1px solid #2ecc71;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+  #home-container #user-friends {
+    font-family: 'Courier New', monospace; }
+    #home-container #user-friends h4 {
+      color: #3498db;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+      margin-bottom: 10px; }
+    #home-container #user-friends a {
+      color: #3498db;
+      text-decoration: none; }
+      #home-container #user-friends a:hover {
+        text-decoration: underline; }
+    #home-container #user-friends p {
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+      border: 1px solid #2ecc71;
+      padding: 10px;
+      background-color: #f7f7f7;
+      border-radius: 5px;
+      margin-bottom: 10px; }
+      #home-container #user-friends p:nth-child(even) {
+        animation-delay: 0.2s; }
+      #home-container #user-friends p:nth-child(odd) {
+        animation-delay: 0.4s; }
+      #home-container #user-friends p:hover {
+        background-color: #e0e0e0; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; } }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%); }
+  to {
+    transform: translateX(0); } }
