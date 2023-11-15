@@ -1,12 +1,63 @@
 const User = require("../models/user");
 
-module.exports.profile = function (req, res) {
-  // res.end('<h1>User Profile</h1>');
+// module.exports.profile = function (req, res) {
+//   // res.end('<h1>User Profile</h1>');
+//   User.findById(req.params.id,function(err,user){
+//     return res.render("user_profile", {
+//       title: "Users",
+//       profile_user:user
+//     });
+//   })
+ 
+// };
 
-  return res.render("user_profile", {
-    title: "Users",
-  });
+module.exports.profile = function (req, res) {
+  // Use findById with promises
+  User.findById(req.params.id)
+    .then((user) => {
+      if (user) {
+        return res.render('user_profile', {
+          title: 'Users',
+          profile_user: user,
+        });
+      } else {
+        return res.status(404).send('User not found');
+      }
+    })
+    .catch((err) => {
+      console.error('Error finding user:', err);
+      return res.status(500).send('Error finding user');
+    });
 };
+
+
+// module.exports.update=function(req,res){
+//   if(req.user.id== req.params.id){
+//     User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+//       return res.redirect('back');
+//     })
+//   }
+//   else{
+//    return  res.status(401).send('Unauthorized');
+//   }
+// }
+
+module.exports.update = function (req, res) {
+  if (req.user.id == req.params.id) {
+    // Use findByIdAndUpdate with promises
+    User.findByIdAndUpdate(req.params.id, req.body)
+      .then((user) => {
+        return res.redirect('back');
+      })
+      .catch((err) => {
+        console.error('Error updating user:', err);
+        return res.status(500).send('Error updating user');
+      });
+  } else {
+    return res.status(401).send('Unauthorized');
+  }
+};
+
 
 // render the sign up page
 module.exports.signUp = function (req, res) {

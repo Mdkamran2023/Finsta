@@ -13,63 +13,9 @@
 
 // const db=require('./config/mongoose');
 
-// // used for session cookies
-// const session=require('express-session');
-// const passport=require('passport');
-// const passportLocal=require('./config/passport-local-strategy');
-
 // // always before routes
 // const expressLayouts=require('express-ejs-layouts');
 // app.use(expressLayouts);
-
-// // extract style and scripts from sub pages into the layouts
-// app.set('layout extractStyles',true);
-// app.set('layout extractScripts',true);
-
-
-
-
-// // for views template i.e adding ejs file
-// // setting up view engine
-// app.set('view engine','ejs');
-// app.set('views','./views');
-
-// // use express router
-// app.use('/',require('./routes/index'));
-
-
-// // 
-// app.use(session({
-//     name:'finsta',
-//     // todo change the secret before deployment in production mode
-//     secret:'blahsomething',
-//     saveUninitialized:false,
-//     resave:false,
-//     Cookie:{
-//         maxAge:(1000*60*100)
-//     }
-// }))
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-
-// app.listen(port,function(err)
-// {
-//     if(err)
-//     {
-//         console.log("Error:",err);
-//         console.log(`Error in running the server:${err}`);//interpolation
-//     }
-//     console.log(`Server is running on port: ${port}`);
-// });
-
-
-// // for accessing static files
-// app.use(express.static('./assets'));
-
-
-
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -82,6 +28,7 @@ const mongoose=require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+//--------------------------------
 const MongoStore=require('connect-mongo');
 const sassMiddleware=require('node-sass-middleware');
 
@@ -97,6 +44,7 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
+// for accessing static files
 app.use(express.static('./assets'));
 
 app.use(expressLayouts);
@@ -106,7 +54,7 @@ app.set('layout extractScripts', true);
 
 
 
-
+// for views template i.e adding ejs file
 // set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
