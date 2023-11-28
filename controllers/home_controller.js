@@ -47,15 +47,12 @@ const User=require('../models/user');
 //                 all_users: users,
 //               });
 //             });
-//           })
-        
+//           }) 
      
 //         .catch(err => {
 //             console.error('Error in finding posts:', err);
 //             return res.status(500).send('Error finding posts');
 //         });
-
-    
 
 //     // console.log(req.cookies);
 //     // // taking res as value of 25 (check application in developers tool)
@@ -65,32 +62,59 @@ const User=require('../models/user');
 // }
 
 
-module.exports.home = function (req, res) {
-  // Query for posts
-  const postsQuery = Post.find({})
-    .populate('user', 'name -_id') // Include name but exclude id
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'user',
-      },
-    })
-    .exec();
+// module.exports.home = function (req, res) {
+//   // Query for posts
+//   const postsQuery = Post.find({})
+//     .populate('user', 'name -_id') // Include name but exclude id
+//     .populate({
+//       path: 'comments',
+//       populate: {
+//         path: 'user',
+//       },
+//     })
+//     .exec();
 
-  // Query for users
-  const usersQuery = User.find({}).exec();
+//   // Query for users
+//   const usersQuery = User.find({}).exec();
 
-  // Use Promise.all to wait for both queries to complete
-  Promise.all([postsQuery, usersQuery])
-    .then(([posts, users]) => {
-      return res.render('home', {
-        title: 'Finsta | Home',
-        posts: posts,
-        all_users: users
-      });
-    })
-    .catch((err) => {
-      console.error('Error in finding posts or users:', err);
-      return res.status(500).send('Error finding posts or users');
+//   // Use Promise.all to wait for both queries to complete
+//   Promise.all([postsQuery, usersQuery])
+//     .then(([posts, users]) => {
+//       return res.render('home', {
+//         title: 'Finsta | Home',
+//         posts: posts,
+//         all_users: users
+//       });
+//     })
+//     .catch((err) => {
+//       console.error('Error in finding posts or users:', err);
+//       return res.status(500).send('Error finding posts or users');
+//     });
+// };
+
+module.exports.home = async function (req, res) {
+  try {
+    // Query for posts
+    const posts = await Post.find({})
+      .populate('user', 'name -_id') // Include name but exclude id
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user',
+        },
+      })
+      .exec();
+
+    // Query for users
+    const users = await User.find({}).exec();
+
+    return res.render('home', {
+      title: 'Finsta | Home',
+      posts: posts,
+      all_users: users
     });
+  } catch (err) {
+    console.error('Error in finding posts or users:', err);
+    return res.status(500).send('Error finding posts or users');
+  }
 };

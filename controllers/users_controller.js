@@ -113,6 +113,8 @@ module.exports.create = (req, res) => {
 
 // sign in and create a session for the user
 module.exports.createSession = function (req, res) {
+  req.flash('success','Loggged in Successfully');
+  //for passing flash to html we have used middleware.setFlash
   return res.redirect('/');
 };
 
@@ -125,6 +127,7 @@ module.exports.createSession = function (req, res) {
 
 module.exports.destroySession = function (req, res) {
   req.logout(function (err) {
+    req.flash('success','You have logged Out!')
     if (err) {
       console.log("Error during logout:", err);
       return;
