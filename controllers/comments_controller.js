@@ -15,11 +15,12 @@ module.exports.create = function(req, res) {
 
                     post.comments.push(comment);
                     post.save();
-
+                    req.flash("success","comments created successfully")
                     res.redirect('/');
                 })
                 .catch(err => {
                     // Handle comment creation error
+                    req.flash("error",err);
                     console.error('Error in creating comment:', err);
                     // Handle the error and send a response
                 });
@@ -55,34 +56,63 @@ module.exports.create = function(req, res) {
 
 
 
-module.exports.destroy = function (req, res) {
-  Comment.findById(req.params.id)
-    .then((comment) => {
-      if (!comment) {
-        return res.status(404).send("Comment not found");
-      }
+// module.exports.destroy = function (req, res) {
+//   Comment.findById(req.params.id)
+//     .then((comment) => {
+//       if (!comment) {
+//         return res.status(404).send("Comment not found");
+//       }
 
-      // Check if the current user is the owner of the comment
-      if (comment.user.toString() === req.user.id) {
-        let postId = comment.post;
+//       // Check if the current user is the owner of the comment
+//       if (comment.user.toString() === req.user.id) {
+//         let postId = comment.post;
 
-        // Remove the comment and update the post
-        return Promise.all([
-          // comment.remove(),
-          comment.deleteOne({ _id: req.params.id }),
-          Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } })
-        ]);
-      } else {
-        return Promise.reject("Unauthorized");
-      }
-    })
-    .then(() => {
-      return res.redirect("back");
-    })
-    .catch((err) => {
-      console.error("Error in deleting comment:", err);
-      return res.status(500).send("Internal Server Error");
-    });
+//         // Remove the comment and update the post
+//         return Promise.all([
+//           // comment.remove(),
+//           comment.deleteOne({ _id: req.params.id }),
+//           Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } })
+//         ]);
+       
+//       } else {
+//         return Promise.reject("Unauthorized");
+//       }
+//     })
+//     .then(() => {
+//       return res.redirect("back");
+//     })
+//     .catch((err) => {
+//       console.error("Error in deleting comment:", err);
+//       return res.status(500).send("Internal Server Error");
+//     });
+// };
+
+module.exports.destroy = async function (req, res) {
+  try {
+    const comment = await Comment.findById(req.params.id);
+
+    if (!comment) {
+      return res.status(404).send("Comment not found");
+    }
+
+    // Check if the current user is the owner of the comment
+    if (comment.user.toString() === req.user.id) {
+      const postId = comment.post;
+
+      // Remove the comment and update the post
+      await Promise.all([
+        comment.deleteOne({ _id: req.params.id }),
+        Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } })
+      ]);
+     req.flash("success","comment deleted successfully")
+      res.redirect("back");
+    } else {
+      throw new Error("Unauthorized");
+    }
+  } catch (err) {
+    console.error("Error in deleting comment:", err);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 

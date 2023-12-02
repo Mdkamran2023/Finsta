@@ -27,10 +27,22 @@ module.exports.create = async function (req, res) {
       // to get the data from the browser
     });
 
+if(req.xhr){
+  return res.status(200).json({
+    data:{
+      post:post
+    },
+    message:"Post Created !"
+  });
+}
+
+    req.flash('success',"Post Published!");
+
     // If post creation is successful, redirect back
     return res.redirect("back");
   } catch (err) {
-    console.error("Error in creating a post:", err);
+    req.flash('error',err);
+    // console.error("Error in creating a post:", err);
     // Handle the error appropriately (e.g., send an error response)
     // For example:
     return res.status(500).send("Error in creating a post");
@@ -121,13 +133,16 @@ module.exports.destroy = async function (req, res) {
         Post.deleteOne({ _id: req.params.id }),
         Comment.deleteMany({ post: req.params.id })
       ]);
+      req.flash('success','Post and associated comments deleted');
       
       res.redirect("back");
     } else {
+      req.flash('error','You cannot delete this post')
       return res.status(403).send("Unauthorized");
     }
   } catch (err) {
-    console.error("Error:", err);
+    // console.error("Error:", err);
+    req.flash("error",err);
 
     res.redirect("back");
   }

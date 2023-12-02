@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
         integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
@@ -43,9 +44,7 @@
                             text: "<%= flash.success %>",
                             type: 'success',
                             layout: 'topRight',     //where to display
-                            timeout: 1500
-
-
+                            timeout: 1500,
                         }).show();
                 <%} %>
 
@@ -56,8 +55,6 @@
                             type: 'error',
                             layout: 'topRight',     //where to display
                             timeout: 1500
-
-
                         }).show();
                 <%} %>
                 </script>

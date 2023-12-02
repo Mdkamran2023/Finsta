@@ -1,15 +1,15 @@
-<li>
+<li id="post-<%= post._id%>">
     <p>
           
         <small>
-            <a href="/posts/destroy/<%= post.id %>">X</a>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
         </small>
       
        
         <%= post.content %>
         <br>
         <small>
-            <%= post.user %>
+            <%= post.user.name %>
         </small>
     </p>
     <div class="post-comments">
