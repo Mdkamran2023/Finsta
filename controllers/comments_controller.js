@@ -1,39 +1,81 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 
-module.exports.create = function(req, res) {
-    Post.findById(req.body.post)
-        .then(post => {
-            if (post) {
-                Comment.create({
-                    content: req.body.content,
-                    post: req.body.post,
-                    user: req.user._id
-                })
-                .then(comment => {
-                    // Handle error
+// module.exports.create = function(req, res) {
+//     Post.findById(req.body.post)
+//         .then(post => {
+//             if (post) {
+//                 Comment.create({
+//                     content: req.body.content,
+//                     post: req.body.post,
+//                     user: req.user._id
+//                 })
+//                 .then(comment => {
+//                     // Handle error
 
-                    post.comments.push(comment);
-                    post.save();
-                    req.flash("success","comments created successfully")
-                    res.redirect('/');
-                })
-                .catch(err => {
-                    // Handle comment creation error
-                    req.flash("error",err);
-                    console.error('Error in creating comment:', err);
-                    // Handle the error and send a response
-                });
-            } else {
-                // Handle post not found
-            }
-        })
-        .catch(err => {
-            // Handle post retrieval error
-            console.error('Error in finding post:', err);
-            // Handle the error and send a response
-        });
-};
+//                     post.comments.push(comment);
+//                     post.save();
+
+                    
+
+//                     req.flash("success","comments created successfully")
+//                     res.redirect('/');
+//                 })
+//                 .catch(err => {
+//                     // Handle comment creation error
+//                     req.flash("error",err);
+//                     console.error('Error in creating comment:', err);
+//                     // Handle the error and send a response
+//                 });
+//             } else {
+//                 // Handle post not found
+//             }
+//         })
+//         .catch(err => {
+//             // Handle post retrieval error
+//             console.error('Error in finding post:', err);
+//             // Handle the error and send a response
+//         });
+// };
+
+module.exports.create = async function(req, res){
+
+  try{
+      let post = await Post.findById(req.body.post);
+
+      if (post){
+          let comment = await Comment.create({
+              content: req.body.content,
+              post: req.body.post,
+              user: req.user._id
+          });
+
+          post.comments.push(comment);
+          post.save();
+
+          if (req.xhr){
+              // Similar for comments to fetch the user's id!
+              comment = await comment.populate('user', 'name').execPopulate();
+  
+              return res.status(200).json({
+                  data: {
+                      comment: comment
+                  },
+                  message: "Post created!"
+              });
+          }
+
+
+          req.flash('success', 'Comment published!');
+
+          res.redirect('/');
+      }
+  }catch(err){
+      req.flash('error', err);
+      return;
+  }
+  
+}
 
 // module.exports.destroy=function(req,res)
 // {
@@ -104,6 +146,17 @@ module.exports.destroy = async function (req, res) {
         comment.deleteOne({ _id: req.params.id }),
         Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } })
       ]);
+
+          // send the comment id which was deleted back to the views
+          if (req.xhr){
+            return res.status(200).json({
+                data: {
+                    comment_id: req.params.id
+                },
+                message: "Post deleted"
+              });
+            }
+
      req.flash("success","comment deleted successfully")
       res.redirect("back");
     } else {

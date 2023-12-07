@@ -96,6 +96,7 @@ module.exports.home = async function (req, res) {
   try {
     // Query for posts
     const posts = await Post.find({})
+      .sort('-createdAt')
       .populate('user' ) // Include name but exclude id  'name -_id'
       .populate({
         path: 'comments',

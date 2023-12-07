@@ -1,2 +1,14 @@
 body {
   background-color: cadetblue; }
+
+#user_profile {
+  align-content: center;
+  width: 120px;
+  height: 120px;
+  margin-left: 40%;
+  margin-block: 3%;
+  border-radius: 50%;
+  /* Makes the image round */
+  border: 2px solid #fff;
+  /* Adds a white border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
