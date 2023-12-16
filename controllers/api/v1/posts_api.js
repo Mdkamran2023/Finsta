@@ -32,7 +32,7 @@ module.exports.destroy = async function (req, res) {
       }
   
       // Check if the current user is the owner of the post
-    //   if (post.user.toString() === req.user.id) {
+      if (post.user.toString() === req.user.id) {
         // Remove the post and associated comments
         await Promise.all([
           Post.deleteOne({ _id: req.params.id }),
@@ -43,11 +43,12 @@ module.exports.destroy = async function (req, res) {
         return res.json(200,{
            message:"Post and associated comments deleted successfully !" 
         });
-    //   } 
-    //   else {
-    //     req.flash('error','You cannot delete this post')
-    //     return res.status(403).send("Unauthorized");
-    //   }
+      } 
+      else {
+       return res.json(401,{
+        message:"You cannot delete this post"
+       })
+      }
     } catch (err) {
         console.log("******",err);
     return res.json(500,{

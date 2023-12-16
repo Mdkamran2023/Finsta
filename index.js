@@ -1,17 +1,3 @@
-// const express=require('express');
-// const app=express();
-// const port=8000;
-
-// // for cookies
-// const cookieParser=require('cookie-parser');
-
-// // reading through the post request
-// app.use(express.urlencoded());
-
-// app.use(cookieParser());
-
-
-// const db=require('./config/mongoose');
 
 // // always before routes
 // const expressLayouts=require('express-ejs-layouts');
@@ -28,6 +14,8 @@ const mongoose=require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT=require('./config/passport-jwt-strategy');
+const passportGoogle=require("./config/passport-google-oauth2-strategy")
 //--------------------------------
 const MongoStore=require('connect-mongo');
 const sassMiddleware=require('node-sass-middleware');
@@ -42,6 +30,7 @@ app.use(sassMiddleware({
  prefix:'/css'
 }))
 
+// reading through the post request
 app.use(express.urlencoded());
 
 app.use(cookieParser());
@@ -106,3 +95,4 @@ app.listen(port, function(err){
 
     console.log(`Server is running on port: ${port}`);
 });
+
