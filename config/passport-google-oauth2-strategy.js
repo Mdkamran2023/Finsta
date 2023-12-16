@@ -7,9 +7,8 @@
 // //tell passport to use a new strategy for google login
 // passport.use(
 //   new googleStrategy({
-//     clientID:
-//       "333066075881-726s9jbkrpo8djholk1jrg622t6crndv.apps.googleusercontent.com",
-//     clientSecret: "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",
+//     clientID:"",
+//     clientSecret: "",
 //     callbackURL: "http://localhost:8000/users/auth/google/callback",
 //   },
 //   function(accessToken,refreshToken,profile,done){
@@ -35,6 +34,10 @@
 //                 console.log('error in creating user google strategy-passport ',err);
 //                 return;
 //             }
+        // "333066075881-726s9jbkrpo8djholk1jrg622t6crndv.apps.googleusercontent.com"
+        // "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"
+
+
 //             else{
 //              return   done(null,user);
 //             }
@@ -57,8 +60,9 @@ passport.use(
   new googleStrategy(
     {
       clientID:
-        "333066075881-726s9jbkrpo8djholk1jrg622t6crndv.apps.googleusercontent.com",
-      clientSecret: "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",
+      ,
+      clientSecret:
+      ,
       callbackURL: "http://localhost:8000/users/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
