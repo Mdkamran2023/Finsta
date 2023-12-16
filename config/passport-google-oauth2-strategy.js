@@ -33,9 +33,9 @@
 //             if(err){
 //                 console.log('error in creating user google strategy-passport ',err);
 //                 return;
-//             }
-        // "333066075881-726s9jbkrpo8djholk1jrg622t6crndv.apps.googleusercontent.com"
-        // "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"
+//             }9g
+        // "93330660758819-726s9jbkrpo8djholk1jrg622t6crndv.apps.googleusercontent.com"
+        // "GGOCSPX-ctQcj5D3CzYBsLVHpt9PP_iJmHFwg"
 
 
 //             else{
