@@ -11,7 +11,7 @@ let transporter=nodemailer.createTransport({
     secure:false, //not using two-factor authentication
     auth: {
         user:"kmd78463@gmail.com",
-        pass:"jbmt hzjm pmpt pwyu"
+        pass:""
     }       ,  //setting up identity(to stop sending mail to anyone from anyone)
 });
 
@@ -35,6 +35,7 @@ return mailHTML;
 }
 
 module.exports={
+    //jbmt hzjm pmpt pwyu
     transporter:transporter,
     renderTemplate:renderTemplate
 }
