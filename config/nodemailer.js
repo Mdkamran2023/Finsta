@@ -12,6 +12,7 @@ let transporter=nodemailer.createTransport({
     auth: {
         user:"kmd78463@gmail.com",
         pass:"jbmt hzjm pmpt pwyu"
+        //auth is the authentication object in the transporter..
     }       ,  //setting up identity(to stop sending mail to anyone from anyone)
 });
 
@@ -23,7 +24,7 @@ ejs.renderFile(
     data,
     function(err,template){
         if(err){
-            console.log("error in rendering template");
+            console.log("error in rendering template",err);
             return;
         }
 

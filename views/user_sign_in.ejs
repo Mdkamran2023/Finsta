@@ -1,12 +1,19 @@
-<h1>Sign In</h1>
+<div style="display: flex; align-items: center; justify-content: center; height: 80vh;">
+    <div style="background-color: #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px;">
+        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Sign In</h1>
 
-<form action="/users/create-session" method="post">
-    <input type="email" name="email" id="email" placeholder="Email" required>
-    <input type="password" name="password" id="password" placeholder="Password" required>
-    <input type="submit" value="Sign In">
-</form>
+        <form action="/users/create-session" method="post" style="margin-bottom: 1rem;">
+            <input type="email" name="email" id="email" placeholder="Email" required style="border: 2px solid #333; padding: 8px; width: 100%; border-radius: 8px;">
+            <input type="password" name="password" id="password" placeholder="Password" required style="border: 2px solid #333; padding: 8px; width: 100%; border-radius: 8px; margin-top: 0.5rem;">
+            <input type="submit" value="Sign In" style="background-color: #3490dc; color: #fff; padding: 8px 12px; border: 2px solid #3490dc; border-radius: 8px; cursor: pointer; width: 100%;  margin-top: 1rem;">
+        </form>
+           
+        <p style="margin-top: 1rem;">
+            <a href="/users/auth/google" style="display: inline-block; padding: 8px 12px; background-color: #e53e3e; color: #fff; text-align: center; border-radius: 8px; cursor: pointer; width: 94%; text-decoration: none;">
+                Sign In Using  Google
+            </a>
+        </p>
+    </div>
+</div>
 
 
-<p>
-    <a href="/users/auth/google"> Google Sign In/Sign Up</a>
-</p>
